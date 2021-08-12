@@ -1,0 +1,38 @@
+SuccessfulRequests
+
+AzureMetrics
+| where  TimeGenerated > ago(7d)
+| where  ResourceProvider =="MICROSOFT.APIMANAGEMENT"
+| where MetricName== "SuccessfulRequests"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+TotalRequests
+
+
+AzureMetrics
+| where  TimeGenerated > ago(7d)
+| where  ResourceProvider =="MICROSOFT.APIMANAGEMENT"
+| where MetricName== "TotalRequests"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+
+FailedRequests
+
+AzureMetrics
+| where  TimeGenerated > ago(7d)
+| where  ResourceProvider =="MICROSOFT.APIMANAGEMENT"
+| where MetricName== "FailedRequests"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+
+
+AzureDiagnostics
+
+AzureDiagnostics
+| where  TimeGenerated > ago(7d)
+| where Category !contains "NetworkSecurityGroup"
+| where Category !contains "Frontdoor"
+
