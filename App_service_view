@@ -1,0 +1,63 @@
+AverageResponseTime
+
+
+AzureMetrics
+| where  TimeGenerated > ago(24h)
+| where ResourceProvider=="MICROSOFT.WEB"
+| where ResourceId contains "/MICROSOFT.WEB/"
+| where MetricName contains "AverageResponseTime"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+
+HttpResponseTime
+
+
+AzureMetrics
+| where  TimeGenerated > ago(24h)
+| where ResourceProvider=="MICROSOFT.WEB"
+| where ResourceId contains "/MICROSOFT.WEB/"
+| where MetricName contains "HttpResponseTime"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+
+Requests
+
+AzureMetrics
+| where  TimeGenerated > ago(24h)
+| where ResourceProvider=="MICROSOFT.WEB"
+| where ResourceId contains "/MICROSOFT.WEB/"
+| where MetricName contains "Requests"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+
+CpuTime
+
+AzureMetrics
+| where  TimeGenerated > ago(24h)
+| where ResourceProvider=="MICROSOFT.WEB"
+| where ResourceId contains "/MICROSOFT.WEB/"
+| where MetricName contains "CpuTime"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+
+CpuPercentage
+
+AzureMetrics
+| where  TimeGenerated > ago(24h)
+| where ResourceProvider=="MICROSOFT.WEB"
+| where ResourceId contains "/MICROSOFT.WEB/"
+| where MetricName contains "CpuPercentage"
+| summarize AggregatedValue = max(Maximum) by bin(TimeGenerated, 5m)
+| render timechart
+
+ApiManagementGatewayLogs 
+
+
+ApiManagementGatewayLogs 
+| where  TimeGenerated > ago(24h)
+| where Category =="GatewayLogs"
+| summarize count() by Region, Url
